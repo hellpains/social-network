@@ -1,0 +1,47 @@
+.item {
+    color: greenyellow;
+    width: 400px;
+    margin-top: 20px;
+}
+
+.item .title {
+    display: flex;
+    width: 400px;
+}
+
+.item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.item .nickname {
+    color: black;
+    font-weight: 600;
+}
+
+.item .post {
+    color: #2a2a2a;
+    margin-left: 10px;
+
+}
+
+.item .timeCountReply {
+    display: flex;
+    width: 145px;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.item .timeCountReply .time{
+    color:#9c9c9c;
+}
+.item .timeCountReply .likeCount{
+    color:#696969;
+}
+.item .timeCountReply .Reply{
+    color:#5f6368;
+}
+
+
+
