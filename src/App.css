@@ -3,11 +3,17 @@
   display: grid;
   width: 1200px;
   grid-template-areas: 'h h' 'n c';
+
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 12fr;
   grid-gap: 10px;
 }
 
+.app-wrapper-content {
+  grid-area: c;
+  border: 1px solid black;
+
+}
 
 
 
