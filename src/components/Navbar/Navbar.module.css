@@ -5,9 +5,9 @@
 }
 
 .item a {
-    color:#344258;
+    color:white;
     text-decoration: none;
 }
 .item a.active{
-    color:#393a4f;
+    color:gold;
 }
