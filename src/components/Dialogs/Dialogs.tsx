@@ -5,16 +5,16 @@ import {Message} from "./Message/Dialogs";
 import {DialogsPageType} from "../../redux/state";
 
 type DialogsPropsType={
-    state:DialogsPageType
+    dialogsPage:DialogsPageType
 }
 
 export const Dialogs = (props:DialogsPropsType) => {
     let [add,setAdd]=useState('')
-    let dialogsElement = props.state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
-    let messageElement = props.state.messages.map(m => <Message key={m.id} message={m.message}/>)
+    let dialogsElement = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messageElement = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
 
-    const onChangeTextHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeTextHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setAdd(e.currentTarget.value)
     }
     const onClickAddMessageHandler = () => {
@@ -32,12 +32,10 @@ export const Dialogs = (props:DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {messageElement}
-                <textarea value={add} onChange={onChangeTextHandler}></textarea>
+                <input value={add} onChange={onChangeTextHandler} />
                 <button onClick={onClickAddMessageHandler}>Add post</button>
             </div>
-            
+
         </div>
     );
 };
-
-
