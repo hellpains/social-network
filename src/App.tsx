@@ -8,8 +8,13 @@ import {Routes, Route} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
 import {Newss} from "./components/News/News";
+import {DialogType, MessageType} from "./index";
 
-const App = () => {
+export type AppType={
+    dialogs:Array<DialogType>
+    message:Array<MessageType>
+}
+const App = (props:AppType) => {
     return (
 
         <div className='app-wrapper'>
@@ -17,7 +22,10 @@ const App = () => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path={'/dialogs'} element={<Dialogs/>}/>
+                    <Route path={'/dialogs'} element={<Dialogs message={props.message} dialogs={props.dialogs}/>}/>
+                    {/*<Route path={'/dialogs'} render={ ()=> <Dialogs/>  }/>*/}
+
+
                     <Route path={'/profile'} element={<Profile/>}/>
                     <Route path={'/newss'} element={<Newss/>}/>
                     <Route path={'/music'} element={<Music/>}/>
