@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
+export type ProfilePropsType={
+    id:number
+    message:string
+    likesCount:number
+}
 export type DialogType={
     id:number
     name:string
@@ -27,10 +32,14 @@ let message = [
     {id: 4, message: 'Yo'},
     {id: 5, message: 'Yo'},
 ]
+let posts=[
+    {id:1,message:'Hi, how are you?',likesCount:15},
+    {id:2,message:'Ii\'s my first post',likesCount:20}
+]
 
 
 ReactDOM.render(
     <BrowserRouter>
-        <App dialogs={dialogs} message={message}/>
+        <App dialogs={dialogs} message={message} posts={posts}/>
     </BrowserRouter>,
     document.getElementById('root'));
