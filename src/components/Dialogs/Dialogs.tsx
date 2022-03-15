@@ -1,49 +1,40 @@
 import React from 'react';
-import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-type DialogItemType = {
-    name: string
-    id: number
-}
-type MessageType = {
-    message: string
-}
+import s from './Dialogs.module.css';
+import {DialogItem} from "./DialogItem/DialogItem";
+import {Message} from "./Message/Dialogs";
 
 export const Dialogs = () => {
+
+    let dialogs = [
+        {id: 1, name: 'Hellpains'},
+        {id: 2, name: 'Xalifat'},
+        {id: 3, name: 'pretty'},
+        {id: 4, name: 'Oland'},
+        {id: 5, name: 'hkmv'},
+        {id: 6, name: 'rosul'},
+    ]
+    let message = [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How is your it-kamasutra'},
+        {id: 3, message: 'Yo'},
+        {id: 4, message: 'Yo'},
+        {id: 5, message: 'Yo'},
+    ]
+    
+
+    let dialogsElement = dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messageElement = message.map(m => <Message key={m.id} message={m.message}/>)
+
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
-
-                <DialogItem name={'Hellpains'} id={1}/>
-                <DialogItem name={'Xalifat'} id={2}/>
-                <DialogItem name={'pretty'} id={3}/>
-                <DialogItem name={'Oland'} id={4}/>
-                <DialogItem name={'hkmv'} id={5}/>
-                <DialogItem name={'rosul'} id={6}/>
+            <div>
+                {dialogsElement}
             </div>
             <div className={s.messages}>
-                <Message message={'Hi'}/>
-                <Message message={'How is your it-kamasutra'}/>
-                <Message message={'Yo'}/>
+                {messageElement}
             </div>
         </div>
     );
 };
 
 
-export const DialogItem = (props: DialogItemType) => {
-    let path = '/dialogs/' + props.id
-    return (
-        <div className={`${s.dialog} ${s.active}`}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-
-
-const Message = (props: MessageType) => {
-    return (
-        <div className={s.dialog}>{props.message}</div>
-    )
-}
