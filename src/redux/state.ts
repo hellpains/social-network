@@ -1,5 +1,11 @@
 
 
+
+
+let rerenderEntireTree=(state:StateType)=>{
+
+}
+
 export type PostType = {
     id: number
     message: string
@@ -21,15 +27,12 @@ export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
 }
-
 export type SidebarPageType = {}
-
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarPageType
 }
-
 export let state: StateType = {
     profilePage: {
         posts: [
@@ -58,8 +61,6 @@ export let state: StateType = {
     },
     sidebar: {}
 }
-
-
 export const addPost = (postMessage: string) => {
     let newPost: PostType = {
         id: 5,
@@ -72,7 +73,9 @@ export const addPost = (postMessage: string) => {
 }
 
 
-
+export const subscribe=(observer:(state:StateType)=>void)=>{
+    rerenderEntireTree=observer
+}
 
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText

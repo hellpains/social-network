@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css';
 
 const Navbar = () => {
-    const activeClassName = (navData: any) => navData.isActive ? s.active : '';
+    const activeClassName = (params: any) => params.isActive ? s.active : '';
 
     return (
         <nav className={s.nav}>
