@@ -8,7 +8,7 @@ import {Routes, Route} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
 import {Newss} from "./components/News/News";
-import {StoreType} from "./redux/state";
+import {store, StoreType} from "./redux/state";
 
 type AppPropsType = {
     store: StoreType
@@ -33,8 +33,9 @@ const App = (props: AppPropsType) => {
                     <Route path={'/profile'} element={
                         <Profile
                             profilePage={state.profilePage}
-                            addPost={props.store.addPost.bind(props.store)}
-                            updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                            dispatch={store.dispatch.bind(store)}
+                            // addPost={props.store.addPost.bind(props.store)}
+                            // updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                         />
                     }/>
                     <Route path={'/newss'} element={<Newss/>}/>

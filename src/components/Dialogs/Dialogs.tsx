@@ -33,7 +33,7 @@ export const Dialogs = (props:DialogsPropsType) => {
             <div className={s.messages}>
                 {messageElement}
                 <input value={add} onChange={onChangeTextHandler} />
-                <button onClick={onClickAddMessageHandler}>Add post</button>
+                <button onClick={onClickAddMessageHandler}>Add message</button>
             </div>
 
         </div>

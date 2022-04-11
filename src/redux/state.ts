@@ -18,6 +18,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageText:string
 }
 export type SidebarPageType = {}
 export type StateType = {
@@ -29,14 +30,21 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType
-    updateNewPostText: (newText: string) => void
-    addPost: (postMessage: string) => void
     subscribe: (observer: (state: StateType) => void) => void
     getState: () => StateType
     _rerenderEntireTree: (state: StateType) => void
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
+
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
+
+export const addPostAC = (newPostText: string) => ({type: ADD_POST, postMessage: newPostText} as const)
+export const updateNewPostTextAC = (postText: string) => ({type: UPDATE_NEW_POST_TEXT, newPostText: postText} as const)
 
 
 export let store: StoreType = {
@@ -64,50 +72,45 @@ export let store: StoreType = {
                 {id: 5, name: 'hkmv'},
                 {id: 6, name: 'rosul'},
             ],
-
+            newMessageText: 'Hello'
         },
         sidebar: {}
     },
-    _rerenderEntireTree(state) {
+    _rerenderEntireTree() {
         console.log('State changed')
     },
 
     getState() {
         return this._state
     },
-    // updateNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._rerenderEntireTree(this._state);
-    // },
-    addPost(postMessage: string) {
-        let newPost: PostType = {
-            id: 5,
-            message: postMessage,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.unshift(newPost)
-        this._state.profilePage.newPostText = '';
-        this._rerenderEntireTree(this._state);
-    },
     subscribe(observer) {
         this._rerenderEntireTree = observer
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost: PostType = {
                 id: 5,
                 message: action.postMessage,
                 likesCount: 0
             }
+            console.log('123')
             this._state.profilePage.posts.unshift(newPost)
             this._state.profilePage.newPostText = '';
             this._rerenderEntireTree(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            console.log(action.newPostText)
+            this._state.profilePage.newPostText = action.newPostText
             this._rerenderEntireTree(this._state);
         }
+
     }
 }
+
+
+
+
+
+
 
 
 
