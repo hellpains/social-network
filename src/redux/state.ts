@@ -18,7 +18,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText:string
+    newMessageText: string
 }
 export type SidebarPageType = {}
 export type StateType = {
@@ -37,14 +37,24 @@ export type StoreType = {
 }
 
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export type ActionsTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageTextAC>
+    | ReturnType<typeof addMessageAC>
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
 
 export const addPostAC = (newPostText: string) => ({type: ADD_POST, postMessage: newPostText} as const)
 export const updateNewPostTextAC = (postText: string) => ({type: UPDATE_NEW_POST_TEXT, newPostText: postText} as const)
+
+
+export const addMessageAC = (newMessageText: string) => ({type: ADD_MESSAGE, messageText: newMessageText} as const)
+export const updateNewMessageTextAC = (body: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, body: body} as const)
+
 
 
 export let store: StoreType = {
@@ -72,7 +82,7 @@ export let store: StoreType = {
                 {id: 5, name: 'hkmv'},
                 {id: 6, name: 'rosul'},
             ],
-            newMessageText: 'Hello'
+            newMessageText: ''
         },
         sidebar: {}
     },
@@ -93,13 +103,20 @@ export let store: StoreType = {
                 message: action.postMessage,
                 likesCount: 0
             }
-            console.log('123')
             this._state.profilePage.posts.unshift(newPost)
             this._state.profilePage.newPostText = '';
             this._rerenderEntireTree(this._state);
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            console.log(action.newPostText)
             this._state.profilePage.newPostText = action.newPostText
+            this._rerenderEntireTree(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageText = action.body
+            this._rerenderEntireTree(this._state);
+        } else if (action.type === ADD_MESSAGE) {
+            let body =this._state.dialogsPage.newMessageText;
+            this._state.dialogsPage.newMessageText='';
+            this._state.dialogsPage.messages.push({id:6,message:body})
+
             this._rerenderEntireTree(this._state);
         }
 

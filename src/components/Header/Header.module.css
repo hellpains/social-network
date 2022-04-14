@@ -1,6 +1,9 @@
 .header {
+    position: relative;
     grid-area: h;
     background-color: green;
+    padding: -0px;
+    /*width: 1000px;*/
 }
 
 .header img {

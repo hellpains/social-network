@@ -1,13 +1,32 @@
 .nav {
     grid-area: n;
-    background-color: burlywood;
-    padding: 20px;
+    padding-top: 10px;
+
+
+}
+
+.item:hover{
+    background-color:#cfd8dc ;
+    border-radius: 5px;
+    /*padding: 5px;*/
+}
+.item{
+    width: 170px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    padding-left: 10px;
 }
 
 .item a {
-    color:white;
+    color:#424242;
+    font-size: 20px;
+    font-family: -apple-system;
     text-decoration: none;
 }
 .item a.active{
-    color:gold;
+    color:black;
+    font-weight: 900;
 }
+

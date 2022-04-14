@@ -10,9 +10,14 @@
 }
 
 .app-wrapper-content {
+  margin-top: 10px;
   grid-area: c;
-  background-color: cornflowerblue;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
 }
-
+body{
+  background-color: #e8eaf6;
+}
 
 

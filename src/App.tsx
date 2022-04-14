@@ -28,6 +28,7 @@ const App = (props: AppPropsType) => {
                     <Route path={'/dialogs'} element={
                         <Dialogs
                             dialogsPage={state.dialogsPage}
+                            dispatch={store.dispatch.bind(store)}
                         />
                     }/>
                     <Route path={'/profile'} element={
