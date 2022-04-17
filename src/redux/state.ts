@@ -1,3 +1,6 @@
+import { profileReducer} from "./profileReducer";
+import { dialogsReducer} from "./dialogsReducer";
+
 export type PostType = {
     id: number
     message: string
@@ -37,23 +40,10 @@ export type StoreType = {
 }
 
 
-export type ActionsTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof updateNewMessageTextAC>
-    | ReturnType<typeof addMessageAC>
-
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-
-export const addPostAC = (newPostText: string) => ({type: ADD_POST, postMessage: newPostText} as const)
-export const updateNewPostTextAC = (postText: string) => ({type: UPDATE_NEW_POST_TEXT, newPostText: postText} as const)
+export type ActionsTypes =DialogsPageType|ProfilePageType
 
 
-export const addMessageAC = (newMessageText: string) => ({type: ADD_MESSAGE, messageText: newMessageText} as const)
-export const updateNewMessageTextAC = (body: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, body: body} as const)
+
 
 
 
@@ -97,28 +87,10 @@ export let store: StoreType = {
         this._rerenderEntireTree = observer
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost: PostType = {
-                id: 5,
-                message: action.postMessage,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.unshift(newPost)
-            this._state.profilePage.newPostText = '';
-            this._rerenderEntireTree(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newPostText
-            this._rerenderEntireTree(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.newMessageText = action.body
-            this._rerenderEntireTree(this._state);
-        } else if (action.type === ADD_MESSAGE) {
-            let body =this._state.dialogsPage.newMessageText;
-            this._state.dialogsPage.newMessageText='';
-            this._state.dialogsPage.messages.push({id:6,message:body})
 
-            this._rerenderEntireTree(this._state);
-        }
+        this._state = profileReducer(this._state, action)
+        this._state = dialogsReducer(this._state, action)
+        this._rerenderEntireTree(this._state);
 
     }
 }
