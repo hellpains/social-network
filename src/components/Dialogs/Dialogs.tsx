@@ -4,11 +4,10 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Dialogs";
 import {
     ActionsTypes,
-    addMessageAC,
     DialogsPageType,
-    updateNewMessageTextAC,
 } from "../../redux/state";
 import {Button, TextField} from "@mui/material";
+import {addMessageAC, updateNewMessageTextAC} from "../../redux/dialogsReducer";
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType

@@ -1,5 +1,5 @@
-import { profileReducer} from "./profileReducer";
-import { dialogsReducer} from "./dialogsReducer";
+import {addPostAC, profileReducer, updateNewPostTextAC} from "./profileReducer";
+import {addMessageAC, dialogsReducer, updateNewMessageTextAC} from "./dialogsReducer";
 
 export type PostType = {
     id: number
@@ -40,7 +40,10 @@ export type StoreType = {
 }
 
 
-export type ActionsTypes =DialogsPageType|ProfilePageType
+export type ActionsTypes =profileReducerType|dialogsReducerType
+export type profileReducerType=ReturnType<typeof addPostAC>|ReturnType<typeof updateNewPostTextAC>
+export type dialogsReducerType=ReturnType<typeof addMessageAC>|ReturnType<typeof updateNewMessageTextAC>
+
 
 
 

@@ -1,4 +1,4 @@
-import { PostType, StateType} from "./state";
+import {ActionsTypes, PostType, StateType} from "./state";
 import {addMessageAC, updateNewMessageTextAC} from "./dialogsReducer";
 
 const ADD_POST = 'ADD-POST';
@@ -9,7 +9,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 
 
-export const profileReducer = (state: StateType, action: profileReducerType) => {
+export const profileReducer = (state: StateType, action: ActionsTypes) => {
 
     switch (action.type) {
         case ADD_POST:
@@ -30,7 +30,6 @@ export const profileReducer = (state: StateType, action: profileReducerType) => 
 
 }
 
-export type profileReducerType=ReturnType<typeof addPostAC>|ReturnType<typeof updateNewPostTextAC>
 
 export const addPostAC = (newPostText: string) => ({type: ADD_POST, postMessage: newPostText} as const)
 export const updateNewPostTextAC = (postText: string) => ({type: UPDATE_NEW_POST_TEXT, newPostText: postText} as const)

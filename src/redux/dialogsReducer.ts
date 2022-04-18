@@ -1,4 +1,4 @@
-import { StateType} from "./state";
+import {ActionsTypes, StateType} from "./state";
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
@@ -7,7 +7,7 @@ const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 
 
-export const dialogsReducer = (state: StateType, action: dialogsReducerType) => {
+export const dialogsReducer = (state: StateType, action: ActionsTypes) => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
@@ -23,7 +23,6 @@ export const dialogsReducer = (state: StateType, action: dialogsReducerType) => 
     }
 }
 
-export type dialogsReducerType=ReturnType<typeof addMessageAC>|ReturnType<typeof updateNewMessageTextAC>
 
 
 export const addMessageAC = (newMessageText: string) => ({type: ADD_MESSAGE, messageText: newMessageText} as const)

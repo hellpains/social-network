@@ -3,11 +3,10 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {
     ActionsTypes,
-    addPostAC,
     PostType,
-    updateNewPostTextAC,
 } from "../../../redux/state";
 import {Box, Button, TextField} from "@mui/material";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
 
 
 type MyPostsType = {
