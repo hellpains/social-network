@@ -5,6 +5,7 @@ export type PostType = {
     id: number
     message: string
     likesCount: number
+    time:string
 }
 export type DialogType = {
     id: number
@@ -35,27 +36,24 @@ export type StoreType = {
     _state: StateType
     subscribe: (observer: (state: StateType) => void) => void
     getState: () => StateType
-    _rerenderEntireTree: (state: StateType) => void
+    _rerenderEntireTree: (state: any) => void
     dispatch: (action: ActionsTypes) => void
 }
 
 
-export type ActionsTypes =profileReducerType|dialogsReducerType
-export type profileReducerType=ReturnType<typeof addPostAC>|ReturnType<typeof updateNewPostTextAC>
-export type dialogsReducerType=ReturnType<typeof addMessageAC>|ReturnType<typeof updateNewMessageTextAC>
-
-
-
-
-
+export type ActionsTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof updateNewMessageTextAC>
 
 
 export let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
-                {id: 1, message: 'Hi, how are you?', likesCount: 15},
-                {id: 2, message: 'Ii\'s my first post', likesCount: 20}
+                {id: 1, message: 'Hi, how are you?', likesCount: 15,time:'21:00'},
+                {id: 2, message: 'Ii\'s my first post', likesCount: 20,time:'11:00'}
             ],
             newPostText: 'it-kamasutra.com'
         },
@@ -91,8 +89,8 @@ export let store: StoreType = {
     },
     dispatch(action) {
 
-        this._state = profileReducer(this._state, action)
-        this._state = dialogsReducer(this._state, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._rerenderEntireTree(this._state);
 
     }

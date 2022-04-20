@@ -5,7 +5,7 @@ import {Avatar} from "@mui/material";
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import {ChatBubbleOutline, Newspaper, PermIdentity, QueueMusic, Settings} from "@mui/icons-material";
 
-const Navbar = () => {
+export const Navbar = () => {
     const activeClassName = (params: any) => params.isActive ? s.active : '';
 
     return (
@@ -33,5 +33,3 @@ const Navbar = () => {
         </nav>
     );
 };
-
-export default Navbar;

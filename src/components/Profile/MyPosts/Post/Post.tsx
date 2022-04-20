@@ -7,6 +7,7 @@ type PostType = {
     message: string
     likesCount: number
     key: number
+    time:string
 }
 
 const Post = (props: PostType) => {
@@ -17,7 +18,7 @@ const Post = (props: PostType) => {
                 <div className={s.post}>
                     <span className={s.text}>{props.message}</span>
                     <div className={s.timeCountReply}>
-                        <div className={s.time}>time</div>
+                        <div className={s.time}>{props.time}</div>
                         <div className={s.likeCount}>
                             {props.likesCount} <Checkbox color={"error"}  style={{margin:'-10px'}} icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}/>
                         </div>

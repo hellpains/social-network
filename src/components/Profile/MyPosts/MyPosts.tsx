@@ -2,29 +2,30 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {
-    ActionsTypes,
     PostType,
 } from "../../../redux/state";
-import {Box, Button, TextField} from "@mui/material";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
+import { Button, TextField} from "@mui/material";
 
 
 type MyPostsType = {
     posts: Array<PostType>
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
-    // updateNewPostText: (newPostText: string) => void
-    // addPost: (postMessage: string) => void
+    updateNewPostText: (newPostText: string) => void
+    addPost: (postMessage: string) => void
 }
 
 export const MyPosts = (props: MyPostsType) => {
     let [error, serError] = useState('')
-    const postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
+    const postsElement = props.posts.map(p => {
+        return(
+            <Post key={p.id} message={p.message} likesCount={p.likesCount} time={p.time}/>
+        )
+    })
 
     const onClickAddPostHandler = () => {
         if (props.newPostText.trim()) {
-            // props.addPost(props.newPostText.trim())
-            props.dispatch(addPostAC(props.newPostText));
+            props.addPost(props.newPostText.trim())
+            // props.dispatch(addPostAC(props.newPostText));
 
         } else {
             serError('error')
@@ -33,9 +34,9 @@ export const MyPosts = (props: MyPostsType) => {
     }
 
     const onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
-        // props.updateNewPostText(e.currentTarget.value)
-        serError('')
-        props.dispatch(updateNewPostTextAC(e.currentTarget.value));
+        props.updateNewPostText(e.currentTarget.value)
+        // serError('')
+        // props.dispatch(updateNewPostTextAC(e.currentTarget.value));
     }
     const addPostKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {

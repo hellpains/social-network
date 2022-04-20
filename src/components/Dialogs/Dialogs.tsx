@@ -3,15 +3,15 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Dialogs";
 import {
-    ActionsTypes,
     DialogsPageType,
 } from "../../redux/state";
 import {Button, TextField} from "@mui/material";
-import {addMessageAC, updateNewMessageTextAC} from "../../redux/dialogsReducer";
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    addMessage:any
+    newMessageText:string
+    onChangeTextHandler:(body:string)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -20,18 +20,13 @@ export const Dialogs = (props: DialogsPropsType) => {
     let messageElement = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
 
-    // const onChangeTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    //     props.dispatch(updateNewPostTextAC(e.currentTarget.value));
-    //     setAdd(e.currentTarget.value)
-    // }
     const onChangeTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         serError('')
-        props.dispatch(updateNewMessageTextAC(e.currentTarget.value));
+        props.onChangeTextHandler(e.currentTarget.value)
     }
     const onClickAddMessageHandler = () => {
         if (props.dialogsPage.newMessageText.trim()) {
-            // props.addPost(props.newPostText.trim())
-            props.dispatch(addMessageAC(props.dialogsPage.newMessageText));
+            props.addMessage(props.newMessageText.trim())
         } else {
             serError('error')
         }
