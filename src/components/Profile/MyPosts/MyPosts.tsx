@@ -35,7 +35,7 @@ export const MyPosts = (props: MyPostsType) => {
 
     const onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
         props.updateNewPostText(e.currentTarget.value)
-        // serError('')
+        serError('')
         // props.dispatch(updateNewPostTextAC(e.currentTarget.value));
     }
     const addPostKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {

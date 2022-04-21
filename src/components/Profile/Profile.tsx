@@ -4,20 +4,17 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ReduxStoreType} from "../../redux/reduxStore";
 
 type ProfileType = {
-    store:ReduxStoreType
+    // store: ReduxStoreType
 }
 
 export const Profile = (props: ProfileType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer
-                store={props.store}
-            />
+            <MyPostsContainer />
         </div>
     );
 };
 
 
-// ({type:'ADD-POST',postMessage:props.M})
 

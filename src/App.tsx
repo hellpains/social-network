@@ -12,13 +12,13 @@ import {ReduxStoreType} from "./redux/reduxStore";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-    store: ReduxStoreType
+    // store: ReduxStoreType
 }
 
 
 const App = (props: AppPropsType) => {
 
-    const state = props.store.getState()
+    // const state = props.store.getState()
 
     return (
         <div className='app-wrapper'>
@@ -28,17 +28,11 @@ const App = (props: AppPropsType) => {
                 <Routes>
 
                     <Route path={'/dialogs'} element={
-                        <DialogsContainer
-                            store={props.store}
-                            // dialogsPage={state.dialogsPage}
-                            // dispatch={props.store.dispatch}
-                        />
+                        <DialogsContainer />
                     }/>
 
                     <Route path={'/profile'} element={
-                        <Profile
-                            store={props.store}
-                        />
+                        <Profile />
                     }/>
 
                     <Route path={'/newss'} element={<Newss/>}/>

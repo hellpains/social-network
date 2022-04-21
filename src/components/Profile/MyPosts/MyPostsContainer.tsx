@@ -1,39 +1,42 @@
-import React, {  useState} from 'react';
+import React, {useState} from 'react';
 import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
 import {ReduxStoreType} from "../../../redux/reduxStore";
+// import StoreContext from "./StoreContext";
+import StoreContext from "../../../StoreContext";
 
 
-type MyPostsType = {
-    store:ReduxStoreType
-}
+type MyPostsType = {}
 
-export const MyPostsContainer = (props: MyPostsType) => {
-    let state=props.store.getState()
+export const MyPostsContainer = () => {
 
-    let [error, serError] = useState('')
-
-    const addPost = () => {
-        if (state.profilePage.newPostText.trim()) {
-            // props.addPost(props.newPostText.trim())
-            props.store.dispatch(addPostAC(state.profilePage.newPostText));
-
-        } else {
-            serError('error')
-        }
-    }
-
-    const onPostChange = (text:string) => {
-        serError('')
-        props.store.dispatch(updateNewPostTextAC(text));
-    }
 
     return (
-        <MyPosts
-            updateNewPostText={onPostChange}
-            addPost={addPost}
-            posts={state.profilePage.posts}
-            newPostText={state.profilePage.newPostText}/>
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    let state = store.getState()
+
+                    const addPost = () => {
+                        if (state.profilePage.newPostText.trim()) {
+                            store.dispatch(addPostAC(state.profilePage.newPostText));
+                        }
+                    }
+
+                    const onPostChange = (text: string) => {
+                        store.dispatch(updateNewPostTextAC(text));
+                    }
+
+                    return (
+                        <MyPosts
+                            updateNewPostText={onPostChange}
+                            addPost={addPost}
+                            posts={store.getState().profilePage.posts}
+                            newPostText={store.getState().profilePage.newPostText}/>)
+
+                }
+            }
+        </StoreContext.Consumer>
     );
 };
 
