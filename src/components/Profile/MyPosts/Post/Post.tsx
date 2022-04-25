@@ -7,7 +7,7 @@ type PostType = {
     message: string
     likesCount: number
     key: number
-    time:string
+    time: string
 }
 
 const Post = (props: PostType) => {
@@ -20,9 +20,14 @@ const Post = (props: PostType) => {
                     <div className={s.timeCountReply}>
                         <div className={s.time}>{props.time}</div>
                         <div className={s.likeCount}>
-                            {props.likesCount} <Checkbox color={"error"}  style={{margin:'-10px'}} icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}/>
+                            {props.likesCount}
+                            <Checkbox
+                                color={"error"}
+                                style={{margin: '-10px'}}
+                                icon={<FavoriteBorder/>}
+                                checkedIcon={<Favorite/>}/>
                         </div>
-                        <Button color={'inherit'} size={'small'} style={{margin:'-10px'}} variant="text">Reply</Button>
+                        <Button color={'inherit'} size={'small'} style={{margin: '-10px'}} variant="text">Reply</Button>
                         {/*<div className={s.Reply}>Reply</div>*/}
                     </div>
                 </div>

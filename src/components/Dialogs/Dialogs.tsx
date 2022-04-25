@@ -1,70 +1,67 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import s from './Dialogs.module.css';
-import {DialogItem} from "./DialogItem/DialogItem";
-import {Message} from "./Message/Dialogs";
-import {
-    DialogsPageType,
-} from "../../redux/state";
+import React, {ChangeEvent, KeyboardEvent,useState} from "react";
+import styles from './Dialogs.module.css';
+import {InitialStateType} from "../../redux/dialogsReducer";
 import {Button, TextField} from "@mui/material";
+import {Message} from "./Message/Dialogs";
+import {DialogItem} from "./DialogItem/DialogItem";
+import s from './Dialogs.module.css'
 
-type DialogsPropsType = {
-    dialogsPage: DialogsPageType
-    addMessage:any
-    newMessageText:string
-    onChangeTextHandler:(body:string)=>void
+type PropsType = {
+    dialogsPage: InitialStateType
+    sendMessage: () => void
+    updateNewMessageText: (newText: string) => void
 }
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = (props: PropsType) => {
+
     let [error, serError] = useState('')
-    let dialogsElement = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
-    let messageElement = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-
-    const onChangeTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        serError('')
-        props.onChangeTextHandler(e.currentTarget.value)
+    const sendMessageHandler = () => {
+        props.sendMessage()
     }
-    const onClickAddMessageHandler = () => {
-        if (props.dialogsPage.newMessageText.trim()) {
-            props.addMessage(props.newMessageText.trim())
-        } else {
-            serError('error')
-        }
+    const updateNewMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.currentTarget.value
+        props.updateNewMessageText(text)
     }
-    const addPostKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    const onEnterSend = (e:KeyboardEvent<HTMLDivElement>) => {
         if (e.key === "Enter") {
-            onClickAddMessageHandler()
+            sendMessageHandler()
         }
     }
 
     return (
         <div className={s.dialogs}>
-            <div>
-                {dialogsElement}
+            <div >
+                <h3 className={s.title}>Dialogs</h3>
+                {props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)}
             </div>
             <div className={s.messages}>
-                {messageElement}
-                <div className={s.buttonAndInput}>
+                <div className={s.messageItem}>
+                    <h3 className={s.title}>Messages</h3>
+                    {props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)}
+                </div>
+                <div className={s.sendMessageForm}>
                     <TextField
+                        style={{width: '700px',}}
                         error={!!error}
-                        label="Size"
                         id="standard-size-small"
                         helperText={error ? "Incorrect entry." : ''}
-                        defaultValue="Small"
+                        placeholder="Message..."
+                        onChange={updateNewMessageTextHandler}
+                        value={props.dialogsPage.newMessageText}
                         size="small"
                         variant="standard"
-                        value={props.dialogsPage.newMessageText}
-                        onChange={onChangeTextHandler}
-                        onKeyPress={addPostKeyPressHandler}
+                        onKeyPress={onEnterSend}
                     />
                     <Button
-                        style={{marginTop: '9px', marginLeft: '10px'}}
+                        onClick={sendMessageHandler}
+                        style={{marginTop: '-5px', marginLeft: '10px'}}
                         variant={'outlined'}
-                        onClick={onClickAddMessageHandler}
-                    >send</Button>
+                    >
+                        Send
+                    </Button>
                 </div>
             </div>
-
         </div>
-    );
-};
+    )
+}

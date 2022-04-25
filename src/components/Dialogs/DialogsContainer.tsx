@@ -1,40 +1,56 @@
-import React, {useState} from 'react';
-import {addMessageAC, updateNewMessageTextAC} from "../../redux/dialogsReducer";
-import {ReduxStoreType} from "../../redux/reduxStore";
+import {InitialStateType,
+    sendMessageAC,
+    updateNewMessageTextAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
-import StoreContext from "../../StoreContext";
+import {connect} from "react-redux";
+import {AllAppActionsType, AppRootStateType} from "../../redux/reduxStore";
+import {Dispatch} from "redux";
+
+type MapStateToPropsType = {
+    dialogsPage: InitialStateType
+}
+
+type MapDispatchToPropsType = {
+    sendMessage: () => void
+    updateNewMessageText: (newText: string) => void
+}
+
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
+    return {
+        dialogsPage: state.dialogsPage,
+    }
+}
+const mapDispatchToProps = (dispatch: Dispatch<AllAppActionsType>): MapDispatchToPropsType => {
+    return {
+        sendMessage: () => {
+            dispatch(sendMessageAC())
+        },
+        updateNewMessageText: (newText: string) => {
+            dispatch(updateNewMessageTextAC(newText))
+        }
+    }
+}
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs)
 
 
-type DialogsPropsType = {}
-
-export const DialogsContainer = () => {
 
 
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    let state = store.getState().dialogsPage
 
-                    const onChangeTextHandler = (body: string) => {
-                        store.dispatch(updateNewMessageTextAC(body));
-                    }
-                    const addMessage = () => {
-                        if (state.newMessageText.trim()) {
-                            store.dispatch(addMessageAC(state.newMessageText));
-                        }
-                    }
-                    return (
 
-                        <Dialogs
-                            dialogsPage={state}
-                            addMessage={addMessage}
-                            newMessageText={state.newMessageText}
-                            onChangeTextHandler={onChangeTextHandler}/>
-                    )
-                }
-            }
-        </StoreContext.Consumer>
-    )
 
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

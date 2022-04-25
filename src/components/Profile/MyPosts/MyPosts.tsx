@@ -1,76 +1,52 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import s from './MyPosts.module.css'
+
+
+import React, {ChangeEvent} from "react";
+import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {
-    PostType,
-} from "../../../redux/state";
-import { Button, TextField} from "@mui/material";
+import {InitialStateType} from "../../../redux/profileReducer";
+import {Button, TextField} from "@mui/material";
 
-
-type MyPostsType = {
-    posts: Array<PostType>
-    newPostText: string
-    updateNewPostText: (newPostText: string) => void
-    addPost: (postMessage: string) => void
+type PropsType = {
+    profilePage: InitialStateType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
-export const MyPosts = (props: MyPostsType) => {
-    let [error, serError] = useState('')
-    const postsElement = props.posts.map(p => {
-        return(
-            <Post key={p.id} message={p.message} likesCount={p.likesCount} time={p.time}/>
-        )
-    })
-
+export const MyPosts = (props: PropsType) => {
     const onClickAddPostHandler = () => {
-        if (props.newPostText.trim()) {
-            props.addPost(props.newPostText.trim())
-            // props.dispatch(addPostAC(props.newPostText));
-
-        } else {
-            serError('error')
-        }
-
+        props.addPost()
     }
-
-    const onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
-        serError('')
-        // props.dispatch(updateNewPostTextAC(e.currentTarget.value));
-    }
-    const addPostKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-            onClickAddPostHandler()
-        }
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.currentTarget.value
+        props.updateNewPostText(text)
     }
 
     return (
-        <div className={s.postsBlocks}>
+        <div className={styles.postsWrapper}>
             <h3>My posts</h3>
             <div>
                 <div >
                     <TextField
-                        error={!!error}
                         label="Size"
                         id="standard-size-small"
-                        helperText={error?"Incorrect entry.":''}
                         defaultValue="Small"
                         size="small"
                         variant="standard"
                         onChange={onPostChange}
-                        value={props.newPostText}
-                        onKeyPress={addPostKeyPressHandler}
+                        value={props.profilePage.newPostText}
                     />
 
 
-                    <Button  style={{marginTop: '9px', marginLeft: '10px'}} variant={'outlined'}
-                            onClick={onClickAddPostHandler}>publish</Button>
+                    <Button  style={{marginTop: '9px', marginLeft: '10px'}}
+                             variant={'outlined'}
+                             onClick={onClickAddPostHandler}>
+                        publish</Button>
                 </div>
             </div>
-            <div className={s.posts}>
-                {postsElement}
+
+            <div className={styles.posts}>
+                {props.profilePage.posts.map(el => <Post key={el.id} message={el.message} likesCount={el.likesCount} time={el.time}/>)}
             </div>
         </div>
-    );
-};
-
+    )
+}

@@ -1,8 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css';
-import {Avatar} from "@mui/material";
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import {ChatBubbleOutline, Newspaper, PermIdentity, QueueMusic, Settings} from "@mui/icons-material";
 
 export const Navbar = () => {

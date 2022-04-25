@@ -1,6 +1,9 @@
 .dialogs {
+
     display: grid;
     grid-template-columns: 2fr 10fr;
+
+
 }
 
 .dialogsItems {
@@ -16,9 +19,20 @@
 
 .messages {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.messageItem{
+    height: 1000px;
+    overflow: auto;
+    margin-bottom: 20px;
 }
 
 
-.buttonAndInput{
-    margin-top: 10px;
+.sendMessageForm{
+    /*margin-top: 10px;*/
+    display: flex;
+    /*width: 500px;*/
+    justify-content: space-between;
 }
