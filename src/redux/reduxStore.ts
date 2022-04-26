@@ -2,15 +2,17 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {ProfileActionsType, profileReducer} from "./profileReducer";
 import {DialogsActionsType, dialogsReducer} from "./dialogsReducer";
 import thunk, {ThunkAction} from "redux-thunk";
+import {usersReducer} from "./usersReducer";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
+    usersPage: usersReducer,
 })
 
 
+export const store = createStore(rootReducer)
 
-export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 // определить автоматически тип всего объекта store
 export type ReduxStoreType = typeof store
@@ -23,9 +25,6 @@ export type AllAppActionsType = DialogsActionsType | ProfileActionsType
 
 //типизация для thunk
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AllAppActionsType>
-
-
-
 
 
 // а это, чтобы можно было в консоли браузера обращаться к store в любой момент

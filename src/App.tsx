@@ -6,8 +6,10 @@ import {Profile} from "./components/Profile/Profile";
 import {Routes, Route} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
-import {Newss} from "./components/News/News";
+import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Users} from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 
@@ -29,9 +31,10 @@ const App = () => {
                         <Profile />
                     }/>
 
-                    <Route path={'/newss'} element={<Newss/>}/>
+                    <Route path={'/news'} element={<News/>}/>
                     <Route path={'/music'} element={<Music/>}/>
                     <Route path={'/settings'} element={<Settings/>}/>
+                    <Route path={'/users'} element={<UsersContainer/>}/>
 
                 </Routes>
             </div>

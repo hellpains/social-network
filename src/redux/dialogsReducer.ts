@@ -5,10 +5,10 @@ export type DialogType = {
     id: number
     name: string
 }
-// export type MessageType = {
-//     id: number
-//     message: string
-// }
+export type MessageType = {
+    id: number
+    message: string
+}
 
 
 const initialState = {
@@ -25,9 +25,9 @@ const initialState = {
         {id: 1, message: "How are you, Sasha?"},
         {id: 2, message: "Good. Are you?"},
         {id: 3, message: "Good"}
-    ]
-    // ] as Array<MessageType>
+    ] as Array<MessageType>
 }
+
 export type InitialStateType = typeof initialState
 
 export const dialogsReducer = (state: InitialStateType = initialState, action: DialogsActionsType): InitialStateType => {
@@ -35,7 +35,10 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: D
         case SEND_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {id: 5, message: state.newMessageText}],
+                messages: [
+                    ...state.messages,
+                    {id: 5, message: state.newMessageText}
+                ],
                 newMessageText: ""
             }
         case UPDATE_NEW_MESSAGE_TEXT:

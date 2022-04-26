@@ -24,7 +24,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
         case ADD_POST:
             return {
                 ...state,
-                posts: [...state.posts, {id: 10, message: state.newPostText, likesCount: 0, time: '15:00'}],
+                posts: [ {id: 10, message: state.newPostText, likesCount: 0, time: '15:00'},...state.posts],
                 newPostText: ""
             }
         case UPDATE_NEW_POST_TEXT:

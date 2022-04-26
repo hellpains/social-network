@@ -1,8 +1,19 @@
 .nav {
     grid-area: n;
     padding-top: 10px;
+    text-decoration: none;
 
+}
 
+.nav a{
+    text-decoration: none;
+
+}
+
+.nav a.active{
+
+    color:black;
+    font-weight: 900;
 }
 
 .item:hover{
@@ -19,14 +30,10 @@
     padding-left: 10px;
 }
 
-.item a {
+.item div {
     color:#424242;
     font-size: 20px;
     font-family: -apple-system;
     text-decoration: none;
-}
-.item a.active{
-    color:black;
-    font-weight: 900;
 }
 

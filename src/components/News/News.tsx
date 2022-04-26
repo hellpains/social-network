@@ -1,7 +1,7 @@
 import React from 'react';
-import s from './Newss.module.css'
+import s from './News.module.css'
 
-export const Newss = () => {
+export const News = () => {
     return (
         <div >
             News
