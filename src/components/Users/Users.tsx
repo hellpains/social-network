@@ -1,17 +1,17 @@
 import React from 'react'
 import s from './Users.module.css'
-import {UserType} from "../../redux/usersReducer";
-import {Avatar, Button} from "@mui/material";
+import {InitialStateType, UserType} from "../../redux/usersReducer";
+import { Button} from "@mui/material";
 
-type PropsType = {
-    users: Array<UserType>
+type UsersType = {
+    usersPage: InitialStateType
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UserType>) => void
 }
 
-export let Users = (props: PropsType) => {
-    if (props.users.length === 0) {
+export let Users = (props: UsersType) => {
+    if (props.usersPage.users.length === 0) {
         props.setUsers(
             [
                 {
@@ -45,7 +45,7 @@ export let Users = (props: PropsType) => {
 
     return (
         <div>
-            {props.users.map(u => {
+            {props.usersPage.users.map(u => {
                 return (
                     <div key={u.id}>
                         <span>

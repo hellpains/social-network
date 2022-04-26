@@ -1,8 +1,8 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 import {ProfileActionsType, profileReducer} from "./profileReducer";
 import {DialogsActionsType, dialogsReducer} from "./dialogsReducer";
-import thunk, {ThunkAction} from "redux-thunk";
-import {usersReducer} from "./usersReducer";
+import  {ThunkAction} from "redux-thunk";
+import {UsersActionsType, usersReducer} from "./usersReducer";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -21,7 +21,7 @@ export type ReduxStoreType = typeof store
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 //тип всех action-ов приложения
-export type AllAppActionsType = DialogsActionsType | ProfileActionsType
+export type AllAppActionsType = DialogsActionsType | ProfileActionsType | UsersActionsType
 
 //типизация для thunk
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AllAppActionsType>

@@ -10,7 +10,6 @@ export type MessageType = {
     message: string
 }
 
-
 const initialState = {
     newMessageText: "",
     dialogs: [
@@ -29,6 +28,7 @@ const initialState = {
 }
 
 export type InitialStateType = typeof initialState
+
 
 export const dialogsReducer = (state: InitialStateType = initialState, action: DialogsActionsType): InitialStateType => {
     switch (action.type) {

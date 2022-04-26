@@ -2,20 +2,19 @@ const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
 
 
-// export type PostType = {
-//     id: number
-//     message: string
-//     likesCount: number
-//     time: string
-// }
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+    time: string
+}
 
 const initialState = {
     newPostText: "",
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 15, time: '21:00'},
         {id: 2, message: 'Ii\'s my first post', likesCount: 20, time: '11:00'}
-    ]
-    // ] as Array<PostType>,
+    ] as Array<PostType>,
 }
 export type InitialStateType = typeof initialState
 

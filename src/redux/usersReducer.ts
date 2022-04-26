@@ -3,7 +3,7 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
 
 
-export type UserType = {
+export type UserType ={
     id: number
     photoUrl:string
     followed: boolean
@@ -40,6 +40,7 @@ const initialState = {
         //     location: {city: 'Piter', country: 'Russia'}
         // },
     ] as Array<UserType>,
+
 }
 export type InitialStateType = typeof initialState
 

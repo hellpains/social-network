@@ -15,6 +15,7 @@ type MapDispatchToPropsType = {
     updateNewMessageText: (newText: string) => void
 }
 
+
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
