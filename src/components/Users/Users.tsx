@@ -4,6 +4,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/206853.png";
 import {Button} from "@mui/material";
 import {InitialStateType} from "../../redux/usersReducer";
+import {NavLink} from "react-router-dom";
 
 type UsersType={
     usersPage:InitialStateType
@@ -43,8 +44,10 @@ export const Users = (props:UsersType) => {
                     <div key={u.id}>
                         <span>
                             <div>
-                                <img src={u.photos.small != null ? u.photos.small : userPhoto} alt=""
-                                     className={s.userPhoto}/>
+                                <NavLink to={'/profile' + u.id}>
+                                    <img src={u.photos.small != null ? u.photos.small : userPhoto} alt=""
+                                         className={s.userPhoto}/>
+                                </NavLink>
                             </div>
                             <div>
                                 {u.followed
