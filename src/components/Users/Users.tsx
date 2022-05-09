@@ -1,35 +1,50 @@
 import React from 'react'
-import s from './Users.module.css'
-import {InitialStateType, UserType} from "../../redux/usersReducer";
-import {Button} from "@mui/material";
-import axios from "axios";
-
+import s from "./Users.module.css";
 // @ts-ignore
-import userPhoto from '../../assets/images/206853.png'
+import userPhoto from "../../assets/images/206853.png";
+import {Button} from "@mui/material";
+import {InitialStateType} from "../../redux/usersReducer";
 
-type UsersType = {
-    usersPage: InitialStateType
+type UsersType={
+    usersPage:InitialStateType
+    pageSize: number
+    totalUsersCount: number
+    currentPage:number
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (users: Array<UserType>) => void
+    onPageChanged:(p:number)=>void
 }
 
-export let Users = (props: UsersType) => {
-    if (props.usersPage.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items)
-        })
+export const Users = (props:UsersType) => {
+
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
+    pages.length = 41
 
 
     return (
         <div>
+            <div>
+                {pages.map(p => {
+                    return (
+                        <span className={props.currentPage === p && s.selectedPage}
+                              onClick={(e) => {props.onPageChanged(p)}}>
+                                {p} -
+                            </span>
+                    )
+                })}
+            </div>
             {props.usersPage.users.map(u => {
                 return (
                     <div key={u.id}>
                         <span>
                             <div>
-                                <img src={ u.photos.small != null ? u.photos.small : userPhoto} alt="" className={s.userPhoto}/>
+                                <img src={u.photos.small != null ? u.photos.small : userPhoto} alt=""
+                                     className={s.userPhoto}/>
                             </div>
                             <div>
                                 {u.followed
@@ -57,4 +72,5 @@ export let Users = (props: UsersType) => {
             })}
         </div>
     )
-}
+};
+
