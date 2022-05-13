@@ -3,11 +3,13 @@ import {ProfileActionsType, profileReducer} from "./profileReducer";
 import {DialogsActionsType, dialogsReducer} from "./dialogsReducer";
 import  {ThunkAction} from "redux-thunk";
 import {UsersActionsType, usersReducer} from "./usersReducer";
+import {authReducer} from "./ authReducer";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
+    auth:authReducer
 })
 
 
