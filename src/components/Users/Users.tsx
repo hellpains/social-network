@@ -67,7 +67,6 @@ export const Users = (props: UsersType) => {
                                                 }
                                                 props.toggleFollowingProgress(false,u.id)
                                             })
-
                                     }} variant={'contained'}>unfollow</Button>
                                     : <Button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
                                         props.toggleFollowingProgress(true,u.id)
@@ -78,7 +77,6 @@ export const Users = (props: UsersType) => {
                                                 }
                                                 props.toggleFollowingProgress(false,u.id)
                                             })
-
                                     }} variant={'contained'}>follow</Button>}
 
                             </div>
