@@ -1,3 +1,10 @@
+
+//const type
+import {Dispatch} from "redux";
+import {profileAPI, usersAPI} from "../api/api";
+import {setTotalUsersCountAC, setUsersAC, toggleIsFetchingAC} from "./usersReducer";
+import {match} from "assert";
+
 const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
 const SET_USER_PROFILE = "SET-USER-PROFILE"
@@ -46,21 +53,31 @@ export type ProfileActionsType =
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof setUserProfile>
 
+
+
+// ACTION TYPE
 export const addPostAC = () => {
     return {
         type: ADD_POST
     } as const
 }
-
 export const updateNewPostTextAC = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT, newText
     } as const
 }
-
 export const setUserProfile = (profile: any) => {
     return {
         type: SET_USER_PROFILE,
         profile
     } as const
+}
+
+
+// THUNK TYPE
+export const getUserTC = (userId:string) => (dispatch: Dispatch) => {
+    profileAPI.getUser(userId)
+        .then(data => {
+            dispatch(setUserProfile(data))
+        })
 }
