@@ -5,11 +5,13 @@ import {Button, TextField} from "@mui/material";
 import {Message} from "./Message/Dialogs";
 import {DialogItem} from "./DialogItem/DialogItem";
 import s from './Dialogs.module.css'
+import {Redirect} from "react-router-dom";
 
 type PropsType = {
     dialogsPage: InitialStateType
     sendMessage: () => void
     updateNewMessageText: (newText: string) => void
+    isAuth:boolean
 }
 
 export const Dialogs = (props: PropsType) => {
@@ -28,6 +30,8 @@ export const Dialogs = (props: PropsType) => {
             sendMessageHandler()
         }
     }
+
+    if(!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div className={s.dialogs}>

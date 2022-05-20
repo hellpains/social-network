@@ -20,22 +20,23 @@ export const usersAPI = {
     follow(id: number) {
         return instance.post(`follow/${id}`)
             .then(res => res.data)
-    }
-}
-
-
-export const headerAPI = {
-    login() {
-        return instance.get(`auth/me`)
-            .then(res => res.data)
-    }
-}
-
-export const profileAPI = {
-    getUser(userId:string) {
+    },
+    getProfile(userId: string) {
         return instance.get(`profile/` + userId)
             .then(res => res.data)
     }
 }
+
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+            .then(res => res.data)
+    }
+}
+//
+// export const profileAPI = {
+//
+// }
 
 

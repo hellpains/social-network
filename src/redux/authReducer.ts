@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {headerAPI} from "../api/api";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = "SET-USER-DATA"
 
@@ -49,8 +49,8 @@ export const setAuthUserDataAC = (userId: number, email: string, login: string) 
 }
 
 // THUNK CREATE
-export const loginTC = () => (dispatch: Dispatch) => {
-    headerAPI.login()
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    authAPI.me()
         .then(data => {
             if (data.resultCode === 0) {
                 const {id, email, login} = data.data

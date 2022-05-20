@@ -45,6 +45,13 @@ export const Navbar = () => {
                 </div>
             </NavLink>
 
+            {/*<NavLink  to={'/login'} className={activeClassName}>*/}
+            {/*    <div className={s.item}>*/}
+            {/*        <People style={{marginRight:'10px'}} color={'primary'}/>*/}
+            {/*        <div >Login</div>*/}
+            {/*    </div>*/}
+            {/*</NavLink>*/}
+
         </nav>
     );
 };
