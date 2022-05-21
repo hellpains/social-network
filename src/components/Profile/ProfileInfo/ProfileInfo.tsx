@@ -5,9 +5,9 @@ import {Preloader} from "../../common/Preloader/Preloader";
 
 export const ProfileInfo = (props:any) => {
 
-    if(!props.profile){
-        return <Preloader/>
-    }
+    // if(!props.profile){
+    //     return <Preloader/>
+    // }
     return (
         <div>
             <div>
