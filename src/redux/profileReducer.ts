@@ -13,12 +13,15 @@ export type PostType = {
     likesCount: number
     time: string
 }
+let data=new Date()
+let time=data.getHours() +':'+data.getSeconds()
+
 
 const initialState = {
     newPostText: "",
     posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 15, time: '21:00'},
-        {id: 2, message: 'Ii\'s my first post', likesCount: 20, time: '11:00'}
+        {id: 1, message: 'Hi, how are you?', likesCount: 15, time:time },
+        {id: 2, message: 'Ii\'s my first post', likesCount: 20, time: time}
     ] as Array<PostType>,
     profile: null
 }
