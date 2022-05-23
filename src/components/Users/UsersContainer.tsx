@@ -5,6 +5,7 @@ import {InitialStateType, setCurrentPageAC, getUsersTC, unfollowTC, followTC} fr
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 
 export class UsersContainer extends React.Component<MapStateToPropsType & MapDispatchToPropsType> {
@@ -42,7 +43,12 @@ type MapStateToPropsType = {
     isFetching: boolean
     followingInProgress: number[]
 }
-
+type MapDispatchToPropsType = {
+    setCurrentPageAC: (currentPage: number) => void
+    getUsersTC: (currentPage: number, pageSize: number) => void
+    followTC: (userId: number) => void
+    unfollowTC: (userId: number) => void
+}//  dispatchType
 
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
@@ -53,24 +59,12 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress
     }
-}                  //  STATE
-
-type MapDispatchToPropsType = {
-    setCurrentPageAC: (currentPage: number) => void
-    getUsersTC: (currentPage: number, pageSize: number) => void
-    followTC: (userId: number) => void
-    unfollowTC: (userId: number) => void
-}//  dispatchType
-
-let withRedirect = withAuthRedirect(UsersContainer)
+}
 
 
-
-
-
-
-
-
-export default connect(mapStateToProps, {
-    setCurrentPageAC, getUsersTC, unfollowTC, followTC,
-})(withRedirect)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        setCurrentPageAC, getUsersTC, unfollowTC, followTC,
+    }),
+    withAuthRedirect
+)(UsersContainer)
