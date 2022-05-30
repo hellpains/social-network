@@ -4,16 +4,18 @@ import {DialogsActionsType, dialogsReducer} from "./dialogsReducer";
 import {UsersActionsType, usersReducer} from "./usersReducer";
 import {authReducer} from "./authReducer";
 import thunk from "redux-thunk";
+import {reducer as formReducer} from "redux-form";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
-    auth:authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 
-export const store = createStore(rootReducer,applyMiddleware(thunk))
+export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 
 // определить автоматически тип всего объекта store
