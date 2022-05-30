@@ -63,6 +63,7 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 
 
 export default compose<React.ComponentType>(
+
     connect(mapStateToProps, {
         setCurrentPageAC, getUsersTC, unfollowTC, followTC,
     }),

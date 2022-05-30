@@ -11,7 +11,7 @@ type PropsType = {
     dialogsPage: InitialStateType
     sendMessage: () => void
     updateNewMessageText: (newText: string) => void
-    isAuth:boolean
+
 }
 
 export const Dialogs = (props: PropsType) => {

@@ -5,19 +5,13 @@ const SET_USER_DATA = "SET-USER-DATA"
 
 
 const initialState = {
-    userId: null,
-    email: null,
-    login: null,
+    userId: null as null | number,
+    email: null as null | string,
+    login: null as null | string,
     isAuth: false
 }
 
-export type InitialStateType = {
-    userId: null | number
-    email: null | string
-    login: null | string
-    isAuth: boolean
-}
-
+export type InitialStateType = typeof initialState
 
 export const authReducer = (state: InitialStateType = initialState, action: DialogsActionsType): InitialStateType => {
     switch (action.type) {
@@ -32,6 +26,8 @@ export const authReducer = (state: InitialStateType = initialState, action: Dial
             return state
     }
 }
+
+
 
 
 export type DialogsActionsType = ReturnType<typeof setAuthUserDataAC>
@@ -51,10 +47,11 @@ export const setAuthUserDataAC = (userId: number, email: string, login: string) 
 // THUNK CREATE
 export const getAuthUserData = () => (dispatch: Dispatch) => {
     authAPI.me()
-        .then(data => {
-            if (data.resultCode === 0) {
-                const {id, email, login} = data.data
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                const {id, email, login} = res.data.data
                 dispatch(setAuthUserDataAC(id, email, login))
+
             }
         })
 

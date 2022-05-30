@@ -2,8 +2,8 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/reduxStore";
-import {getUserProfileTC, setUserProfile} from "../../redux/profileReducer";
-import { RouteComponentProps, withRouter} from "react-router-dom";
+import {getStatus, getUserProfileTC, updateStatus} from "../../redux/profileReducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
@@ -32,37 +32,44 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2';
+            userId = '23657';
         }
-        this.props.getUserProfileTC(userId)
+        this.props.getUserProfileTC(userId);
+        this.props.getStatus(userId)
 
     }
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         );
     }
 };
 
 
 type MapDispatchPropsType = {
-    setUserProfile: (profile: MapStateToPropsType) => void
     getUserProfileTC: (userId: string) => void
+    getStatus: (userId: string) => void
+    updateStatus: (status: string) => void
 }
 type MapStateToPropsType = {
     profile: null | ProfileType
+    status: string
 }
 
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 }
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setUserProfile, getUserProfileTC}),
+    connect(mapStateToProps, {getUserProfileTC, getStatus, updateStatus}),
+    withAuthRedirect,
     withRouter,
-    withAuthRedirect
 )(ProfileContainer)
