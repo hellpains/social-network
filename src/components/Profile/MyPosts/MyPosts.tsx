@@ -4,12 +4,18 @@ import Post from "./Post/Post";
 import {InitialStateType} from "../../../redux/profileReducer";
 import {Button, TextField} from "@mui/material";
 import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormControls/FormControls";
+
+
+
+const maxLength10=maxLengthCreator(10)
+
 
 type PropsType = {
     profilePage: InitialStateType
     addPost: (newPostText: string) => void
 }
-
 export const MyPosts = (props: PropsType) => {
 
     const onAddPost = (values: any) => {
@@ -50,7 +56,12 @@ const AddPostForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={'textarea'} name={'newPostText'}/>
+                <Field
+                    placeholder={'Post message'}
+                    component={Textarea}
+                    name={'newPostText'}
+                    validate={[required,maxLength10 ]}
+                />
             </div>
 
             <div>

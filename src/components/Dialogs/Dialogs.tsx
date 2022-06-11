@@ -5,6 +5,10 @@ import {Message} from "./Message/Dialogs";
 import {DialogItem} from "./DialogItem/DialogItem";
 import s from './Dialogs.module.css'
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../common/FormControls/FormControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
+
 
 type PropsType = {
     dialogsPage: InitialStateType
@@ -36,17 +40,3 @@ export const Dialogs = (props: PropsType) => {
 }
 
 
-const AddMessageForm = (props: any) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message'}/>
-            </div>
-            <div>
-                <button>Send</button>
-            </div>
-        </form>
-    )
-}
-
-const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)
