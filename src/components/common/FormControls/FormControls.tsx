@@ -2,10 +2,10 @@ import React from 'react'
 import s from './FormControls.module.css'
 
 type PropsType = {
-    input: any
+    input?: any
     meta: any
-    child: any
-    element:any
+    child?: any
+    element?:any
 }
 
 
@@ -23,11 +23,13 @@ export const FormControl: React.FC<PropsType> = ({input, meta, child,element, ..
 }
 
 
-export const Textarea = (props: any) => {
-    return   <FormControl {...props}><textarea {...props.input} {...props} /></FormControl>
+export const Textarea: React.FC<PropsType> = (props) => {
+    const {input, meta,child,...restProps}=props
+    return   <FormControl {...props}><textarea {...input} {...restProps} /></FormControl>
 }
 
 
-export const Input = (props: any) => {
-    return <FormControl {...props}><input {...props.input} {...props} /></FormControl>
+export const Input: React.FC<PropsType> = (props) => {
+    const {input, meta,child,...restProps}=props
+    return   <FormControl {...props}><input {...input} {...restProps} /></FormControl>
 }
