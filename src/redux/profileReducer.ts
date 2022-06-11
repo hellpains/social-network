@@ -18,7 +18,6 @@ export type PostType = {
 
 
 const initialState = {
-    newPostText: "",
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 15, time: '20:00'},
         {id: 2, message: 'Ii\'s my first post', likesCount: 20, time: '20:00'}
@@ -33,13 +32,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
         case ADD_POST:
             return {
                 ...state,
-                posts: [{id: 10, message: state.newPostText, likesCount: 0, time: '15:00'}, ...state.posts],
-                newPostText: ""
-            }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
+                posts: [{id: 10, message: action.newPostText, likesCount: 0, time: '15:00'}, ...state.posts]
             }
         case SET_STATUS:
             return {
@@ -55,23 +48,20 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
 
 
 export type ProfileActionsType =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 
 
 // ACTION TYPE
-export const addPostAC = () => {
+export const addPostAC = (newPostText: string) => {
     return {
-        type: ADD_POST
+        type: ADD_POST,
+        newPostText
     } as const
 }
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT, newText
-    } as const
-}
+
+
 export const setUserProfile = (profile: any) => {
     return {
         type: SET_USER_PROFILE,

@@ -1,5 +1,5 @@
-import {addPostAC, profileReducer, updateNewPostTextAC} from "./profileReducer";
-import { dialogsReducer, updateNewMessageTextAC} from "./dialogsReducer";
+import {addPostAC, profileReducer} from "./profileReducer";
+import { dialogsReducer} from "./dialogsReducer";
 
 // export type PostType = {
 //     id: number
