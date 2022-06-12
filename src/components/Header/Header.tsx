@@ -4,7 +4,8 @@ import s from './Header.module.css';
 
 type PropsType = {
     isAuth: boolean,
-    login: string|null
+    login: string | null
+    logout:()=>void
 }
 
 export const Header = (props: PropsType) => {
@@ -14,7 +15,9 @@ export const Header = (props: PropsType) => {
                 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS__d-ag5ZGjKWWC-j0okLJAQaqKwiuhAZcRw&usqp=CAU'/>
 
             <div className={s.loginBlock}>
-                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth
+                    ? <div>{props.login} - <button onClick={props.logout}>Logout</button></div>
+                    : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     );
