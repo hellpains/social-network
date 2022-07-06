@@ -13,7 +13,7 @@ export type ProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    userId: number
+    userId: string|null
     photos: {
         small: string
         large: string
@@ -24,16 +24,15 @@ type PathParamsType = {
     userId: string
 }
 
-type OwnPropsType = MapStateToPropsType & MapDispatchPropsType
-
-type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
-
 class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
+        debugger
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '23657';
+            // @ts-ignore
+            userId = this.props.authorizedUserId;
         }
+        debugger
         this.props.getUserProfileTC(userId);
         this.props.getStatus(userId)
 
@@ -50,6 +49,24 @@ class ProfileContainer extends React.Component<PropsType> {
 };
 
 
+let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
+    return {
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.userId,
+        isAuth: state.auth.isAuth
+    }
+}
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfileTC, getStatus, updateStatus}),
+    withAuthRedirect,
+    withRouter,
+)(ProfileContainer)
+
+
+
+
 type MapDispatchPropsType = {
     getUserProfileTC: (userId: string) => void
     getStatus: (userId: string) => void
@@ -58,18 +75,9 @@ type MapDispatchPropsType = {
 type MapStateToPropsType = {
     profile: null | ProfileType
     status: string
+    authorizedUserId: null|string
+    isAuth: boolean
 }
+type OwnPropsType = MapStateToPropsType & MapDispatchPropsType
 
-let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
-    return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status
-    }
-}
-
-
-export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfileTC, getStatus, updateStatus}),
-    withAuthRedirect,
-    withRouter,
-)(ProfileContainer)
+type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType

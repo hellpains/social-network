@@ -77,14 +77,14 @@ export const setStatus = (status: string) => {
 
 
 // THUNK TYPE
-export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
+export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId)
         .then(data => {
             dispatch(setUserProfile(data))
         })
 }
 
-export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+export const getStatus = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId)
         .then(res => {
             dispatch(setStatus(res.data))
